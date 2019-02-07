@@ -1,11 +1,11 @@
 {
-  "name": "MongoDB-api",
+  "name": "express-postgres-api-v2",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js"
   },
-  "repository": "https://github.com/PierreDV/MongoDB-api.git",
+  "repository": "https://github.com/PierreDV/express-postgres-api-v2.git",
   "author": "PierreDV <p.verteuil@gmail.com>",
   "license": "MIT",
   "dependencies": {
