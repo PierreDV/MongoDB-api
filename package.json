@@ -1,0 +1,14 @@
+{
+  "name": "MongoDB-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/PierreDV/MongoDB-api.git",
+  "author": "PierreDV <p.verteuil@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.10",
+    "morgan": "^1.9.1"
+  }
+}
