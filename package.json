@@ -2,6 +2,9 @@
   "name": "MongoDB-api",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
   "repository": "https://github.com/PierreDV/MongoDB-api.git",
   "author": "PierreDV <p.verteuil@gmail.com>",
   "license": "MIT",
@@ -9,6 +12,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.4.10",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.9"
   }
 }
