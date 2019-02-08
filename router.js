@@ -1,4 +1,3 @@
-const db = require('./db');
 const Authentication = require('./controllers/authentication');
 
 module.exports = (app) => {
