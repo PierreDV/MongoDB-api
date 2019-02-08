@@ -1,8 +1,10 @@
-const db = require('./db');
+const db = require('../db');
 
 exports.signup = (req, res, next) => {
 	const email = req.body.email;
 	const password = req.body.password;
+
+	db.getUserByEmail(email);
 
 	// See if a user with the given email exists
 
