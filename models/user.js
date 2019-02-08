@@ -1,6 +1,6 @@
 const userSchema = {
-  email: { type: String, unique: true, lowercase: true },
-  password: String,
+	email: { type: String, unique: true, lowercase: true },
+	password: String,
 };
 
 class User {
@@ -8,6 +8,6 @@ class User {
 		this.email = email;
 		this.password = password;
 	}
-};
+}
 
 module.exports = User;
