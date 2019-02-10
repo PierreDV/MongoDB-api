@@ -2,7 +2,6 @@ import moment from 'moment';
 import uuidv4 from 'uuid/v4';
 import db from '../db';
 import Helper from './Helper';
-import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 const User = {
 	async create(req, res) {
