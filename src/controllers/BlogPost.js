@@ -2,7 +2,7 @@ import moment, { updateLocale } from 'moment';
 import uuidv4 from 'uuid/v4';
 import db from '../db';
 
-const findOneQuery = 'SELECT * FROM blog_posts WHERE id = $1 AND author_id = $2';
+const findOneQuery = 'SELECT * FROM blog_posts WHERE id = $1';
 
 const BlogPost = {
 	async create(req, res) {
@@ -27,9 +27,18 @@ const BlogPost = {
 		}
 	},
 	async getAll(req, res) {
-		const findAllQuery = 'SELECT * FROM blog_posts WHERE author_id = $1';
+		const findAllQuery = 'SELECT * FROM blog_posts';
 		try {
-			const { rows, rowCount } = await db.query(findAllQuery, [req.user.id]);
+			const { rows, rowCount } = await db.query(findAllQuery, []);
+			return res.status(200).send({ rows, rowCount });
+		} catch(error) {
+			return res.status(400).send(error);
+		}
+	},
+	async getAllFromAuthor(req, res) {
+		const findAllFromAuthorQuery = 'SELECT * FROM blog_posts WHERE author_id = $1';
+		try {
+			const { rows, rowCount } = await db.query(findAllFromAuthorQuery, [req.params.id]);
 			return res.status(200).send({ rows, rowCount });
 		} catch(error) {
 			return res.status(400).send(error);
@@ -37,7 +46,7 @@ const BlogPost = {
 	},
 	async getOne(req, res) {
 		try {
-			const { rows } =await db.query(findOneQuery, [req.params.id, req.user.id]);
+			const { rows } =await db.query(findOneQuery, [req.params.id]);
 			if(!rows[0]) {
 				return res.status(404).send({'message': 'blog post not found.'});
 			}
