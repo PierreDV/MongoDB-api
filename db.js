@@ -82,16 +82,6 @@ const dropBlogPostTable = () => {
 		});
 };
 
-const createAllTables = () => {
-	createUserTable();
-	createBlogPostTable();
-};
-
-const dropAllTables = () => {
-	dropUserTable();
-	dropBlogPostTable();
-};
-
 pool.on('remove', () => {
 	console.log('client removed');
 	process.exit(0);
@@ -100,10 +90,8 @@ pool.on('remove', () => {
 module.exports = {
 	createUserTable,
 	createBlogPostTable,
-	createAllTables,
 	dropUserTable,
-	dropBlogPostTable,
-	dropAllTables
+	dropBlogPostTable
 };
 
 require('make-runnable');
