@@ -19,7 +19,7 @@ const createUserTable = () => {
 				email VARCHAR(128) UNIQUE NOT NULL,
 				password VARCHAR(128) NOT NULL,
 				created_at TIMESTAMP,
-				modified_at TIMESTAMP
+				updated_at TIMESTAMP
 			)`;
 	
 	pool.query(queryText)
@@ -42,7 +42,7 @@ const createBlogPostTable = () => {
 				body_text TEXT NOT NULL,
 				author_id UUID NOT NULL,
 				created_at TIMESTAMP,
-				modified_at TIMESTAMP,
+				updated_at TIMESTAMP,
 				FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE
 			)`;
 	pool.query(queryText)
@@ -57,7 +57,7 @@ const createBlogPostTable = () => {
 };
 
 const dropUserTable = () => {
-	const queryText = 'DROP TABLE IF EXISTS users returning *';
+	const queryText = 'DROP TABLE IF EXISTS users CASCADE';
 	pool.query(queryText)
 		.then((res) => {
 			console.log(res);
@@ -70,7 +70,7 @@ const dropUserTable = () => {
 };
 
 const dropBlogPostTable = () => {
-	const queryText = 'DROP TABLE IF EXISTS blog_posts returning *';
+	const queryText = 'DROP TABLE IF EXISTS blog_posts';
 	pool.query(queryText)
 		.then((res) => {
 			console.log(res);
