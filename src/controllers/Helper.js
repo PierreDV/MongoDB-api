@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const Helper = {
 	hashPassword(password) {
@@ -9,6 +10,14 @@ const Helper = {
 	},
 	isValidEmail(email) {
 		return /\S+@\S+\.\S+/.test(email);
+	},
+	generateToken(id) {
+		const token = jwt.sign({
+			userId: id
+		},
+		process.env.SECRET, { expiresIn: '7d' }
+		);
+		return token;
 	}
 };
 
