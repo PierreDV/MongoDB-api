@@ -19,6 +19,7 @@ app.post('/api/v1/blog_posts', Auth.verifyToken, BlogPost.create);
 app.get('/api/v1/blog_posts', Auth.verifyToken, BlogPost.getAll);
 app.get('/api/v1/blog_posts/:id', Auth.verifyToken, BlogPost.getOne);
 app.put('/api/v1/blog_posts/:id', Auth.verifyToken, BlogPost.update);
+app.delete('/api/v1/blog_posts/:id', Auth.verifyToken, BlogPost.delete);
 
 app.listen(8080);
 console.log('app running on port 8080');

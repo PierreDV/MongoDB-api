@@ -64,8 +64,20 @@ const BlogPost = {
 			];
 			const response = await db.query(updateQuery, values);
 			return res.status(200).send(response.rows[0]);
-		} catch(err) {
-			return res.status(400).send(err);
+		} catch(error) {
+			return res.status(400).send(error);
+		}
+	},
+	async delete(req, res) {
+		const deleteQuery = 'DELETE FROM blog_posts WHERE id=$1 AND author_id = $2 returning *';
+		try {
+			const { rows } = await db.query(deleteQuery, [req.params.id, req.user.id]);
+			if(!rows[0]) {
+				return res.status(404).send({'message': 'blog post not found'});
+			}
+			return res.status(204).send({'message': 'blog post deleted'});
+		} catch(error) {
+			return res.status(400).send(error);
 		}
 	}
 }
