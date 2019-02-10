@@ -1,10 +1,12 @@
 import express from 'express';
-import User from './src/controllers/User';
+import dotenv from 'dotenv';
 import '@babel/polyfill';
+import User from './src/controllers/User';
 
+dotenv.config();
 const app = express();
 
-app.use(express.json);
+app.use(express.json());
 
 app.get('/', (req, res) => {
 	return res.status(200).send({'message': 'Your enpoint is working'});
