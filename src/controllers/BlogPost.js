@@ -24,6 +24,15 @@ const BlogPost = {
 		} catch(error) {
 			return res.status(400).send(error);
 		}
+	},
+	async getAll(req, res) {
+		const findAllQuery = 'SELECT * FROM blog_posts WHERE author_id = $1';
+		try {
+			const { rows, rowCount } = await db.query(findAllQuery, [req.user.id]);
+			return res.status(200).send({ rows, rowCount });
+		} catch(error) {
+			return res.status(400).send(error);
+		}
 	}
 }
 
