@@ -7,7 +7,7 @@ const pool = new Pool({
 	connectionString: process.env.DATABASE_URL
 });
 
-Pool.once('connect', () => {
+Pool.on('connect', () => {
 	console.log('connected to the db');
 });
 
@@ -43,7 +43,7 @@ const createBlogPostTable = () => {
 				author_id UUID NOT NULL,
 				created_at TIMESTAMP,
 				modified_at TIMESTAMP,
-				FOREIGN KEY (author_id) REFERTENCES users (id) ON DELETE CASCADE
+				FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE
 			)`;
 	pool.query(queryText)
 		.then((res) => {
