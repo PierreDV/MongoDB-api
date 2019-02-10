@@ -2,6 +2,7 @@ import moment from 'moment';
 import uuidv4 from 'uuid/v4';
 import db from '../db';
 import { create } from 'domain';
+import { getEnabledCategories } from 'trace_events';
 
 const BlogPost = {
 	async create(req, res) {
@@ -30,6 +31,18 @@ const BlogPost = {
 		try {
 			const { rows, rowCount } = await db.query(findAllQuery, [req.user.id]);
 			return res.status(200).send({ rows, rowCount });
+		} catch(error) {
+			return res.status(400).send(error);
+		}
+	},
+	async getOne(req, res) {
+		const text = 'SELECT * FROM blog_posts WHERE id = $1 AND author_id = $2';
+		try {
+			const { rows } =await db.query(text, [req.params.id, req.user.id]);
+			if(!rows[0]) {
+				return res.status(404).send({'message': 'blog post not found.'});
+			}
+			return res.status(200).send(rows[0]);
 		} catch(error) {
 			return res.status(400).send(error);
 		}
