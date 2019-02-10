@@ -6,6 +6,9 @@ const Helper = {
 	},
 	comparePassword(hashPassword, password) {
 		return bcrypt.compareSync(password, hashPassword);
+	},
+	isValidEmail(email) {
+		return /\S+@\S+\.\S+/.test(email);
 	}
 };
 
