@@ -1,8 +1,8 @@
-import moment from 'moment';
+import moment, { updateLocale } from 'moment';
 import uuidv4 from 'uuid/v4';
 import db from '../db';
-import { create } from 'domain';
-import { getEnabledCategories } from 'trace_events';
+
+const findOneQuery = 'SELECT * FROM blog_posts WHERE id = $1 AND author_id = $2';
 
 const BlogPost = {
 	async create(req, res) {
@@ -36,15 +36,36 @@ const BlogPost = {
 		}
 	},
 	async getOne(req, res) {
-		const text = 'SELECT * FROM blog_posts WHERE id = $1 AND author_id = $2';
 		try {
-			const { rows } =await db.query(text, [req.params.id, req.user.id]);
+			const { rows } =await db.query(findOneQuery, [req.params.id, req.user.id]);
 			if(!rows[0]) {
 				return res.status(404).send({'message': 'blog post not found.'});
 			}
 			return res.status(200).send(rows[0]);
 		} catch(error) {
 			return res.status(400).send(error);
+		}
+	},
+	async update(req, res) {
+		const updateQuery = `UPDATE blog_posts
+			SET title=$1, body_text=$2, updated_at=$3
+			WHERE id=$4 AND author_id=$5 returning *`;
+		try {
+			const { rows } = await db.query(findOneQuery, [req.params.id, req.user.id]);
+			if(!rows[0]) {
+				return res.status(404).send({'message': 'blog post not found'});
+			}
+			const values = [
+				req.body.title || rows[0].title,
+				req.body.body_text || rows[0].body_text,
+				moment(new Date()),
+				req.params.id,
+				req.user.id
+			];
+			const response = await db.query(updateQuery, values);
+			return res.status(200).send(response.rows[0]);
+		} catch(err) {
+			return res.status(400).send(err);
 		}
 	}
 }
