@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 // Default route
 app.get('/', (req, res) => {
-	return res.status(200).send({'message': 'Your enpoint is working'});
+  return res.status(200).send({'message': 'Your enpoint is working'});
 });
 // User routes
 app.post('/api/v1/users', User.create);
