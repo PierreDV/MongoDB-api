@@ -1,5 +1,6 @@
 import express from 'express';
 import User from './src/controllers/User';
+import '@babel/polyfill';
 
 const app = express();
 
