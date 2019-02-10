@@ -3,7 +3,7 @@ import uuidv4 from 'uuid/v4';
 import db from '../db';
 import { create } from 'domain';
 
-const Reflection = {
+const BlogPost = {
 	async create(req, res) {
 		const createQuery = `INSERT INTO
 			blog_posts(id, title, body_text, author_id, created_at, updated_at)
@@ -27,3 +27,5 @@ const Reflection = {
 		}
 	}
 }
+
+export default BlogPost;

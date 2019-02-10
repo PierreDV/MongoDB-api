@@ -1,6 +1,8 @@
 import express from 'express';
 import '@babel/polyfill';
 import User from './src/controllers/User';
+import BlogPost from './src/controllers/BlogPost';
+import Auth from './src/middleware/Auth';
 
 const app = express();
 
@@ -12,6 +14,8 @@ app.get('/', (req, res) => {
 
 app.post('/api/v1/users', User.create);
 app.post('/api/v1/users/login', User.login);
+
+app.post('/api/v1/blog_posts', Auth.verifyToken, BlogPost.create);
 
 app.listen(8080);
 console.log('app running on port 8080');
