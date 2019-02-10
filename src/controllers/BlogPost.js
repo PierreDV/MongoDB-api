@@ -11,7 +11,6 @@ const BlogPost = {
 			returning *`;
 		const values = [
 			uuidv4(),
-			req.body.success,
 			req.body.title,
 			req.body.body_text,
 			req.user.id,
