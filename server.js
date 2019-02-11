@@ -16,8 +16,8 @@ app.post('/api/v1/users', User.create);
 app.post('/api/v1/users/login', User.login);
 // Blog post routes
 app.get('/api/v1/blog_posts', BlogPost.getAll);
-app.get('/api/v1/blog_posts/:id', BlogPost.getAllFromAuthor);
-app.get('/api/v1/blog_post/:id', BlogPost.getOne);
+app.get('/api/v1/user/:id/blog_posts', BlogPost.getAllFromAuthor);
+app.get('/api/v1/blog_posts/:id', BlogPost.getOne);
 app.post('/api/v1/blog_posts', Auth.verifyToken, BlogPost.create);
 app.put('/api/v1/blog_posts/:id', Auth.verifyToken, BlogPost.update);
 app.delete('/api/v1/blog_posts/:id', Auth.verifyToken, BlogPost.delete);
