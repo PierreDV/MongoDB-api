@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import '@babel/polyfill';
 import User from './src/controllers/User';
 import BlogPost from './src/controllers/BlogPost';
@@ -6,6 +7,7 @@ import Auth from './src/middleware/Auth';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 // Default route
 app.get('/', (req, res) => {
