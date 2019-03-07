@@ -35,6 +35,15 @@ const BlogPost = {
       return res.status(400).send(error);
     }
   },
+  async getAllLinks(req, res) {
+    const findAllLinksQuery = 'SELECT title, id FROM blog_posts';
+    try {
+      const { rows, rowCount } = await db.query(findAllLinksQuery, []);
+      return res.status(200).send({ rows, rowCount });
+    } catch(error) {
+      return res.status(400).send(error);
+    }
+  },
   async getAllFromAuthor(req, res) {
     const findAllFromAuthorQuery = 'SELECT * FROM blog_posts WHERE author_id = $1';
     try {
