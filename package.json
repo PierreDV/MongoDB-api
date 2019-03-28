@@ -1,10 +1,16 @@
 {
   "name": "express-postgres-api-v2",
   "version": "1.0.0",
+  "engines" : {
+    "node": "10.0.0"
+  },
   "private": true,
   "scripts": {
-    "build": "babel server.js --out-dir build",
-    "dev-start": "babel-watch server.js"
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/index.js",
+    "dev-start": "babel-watch server.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s"
   },
   "repository": "https://github.com/PierreDV/express-postgres-api-v2.git",
   "author": "PierreDV <p.verteuil@gmail.com>",
