@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import '@babel/polyfill';
-import User from './src/controllers/User';
-import BlogPost from './src/controllers/BlogPost';
-import Auth from './src/middleware/Auth';
+import User from './controllers/User';
+import BlogPost from './controllers/BlogPost';
+import Auth from './middleware/Auth';
 
 const app = express();
 
