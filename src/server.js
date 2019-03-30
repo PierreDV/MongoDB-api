@@ -7,7 +7,8 @@ import Auth from './middleware/Auth';
 
 const app = express();
 
-app.use(cors({origin: 'http://localhost:3000'}));
+const whitelist = (app.settings.env === 'development') ? 'http://localhost:3000' : process.env.FRONT_END_URL;
+app.use(cors({origin: whitelist}));
 app.use(express.json());
 // Default route
 app.get('/', (req, res) => {
