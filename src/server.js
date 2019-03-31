@@ -26,7 +26,6 @@ app.post('/api/v1/blog_posts', Auth.verifyToken, BlogPost.create);
 app.put('/api/v1/blog_posts/:id', Auth.verifyToken, BlogPost.update);
 app.delete('/api/v1/blog_posts/:id', Auth.verifyToken, BlogPost.delete);
 
-console.log(process.env.PORT)
 var server_port = process.env.PORT || 80;
 var server_host = '0.0.0.0';
 

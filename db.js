@@ -16,6 +16,8 @@ const createUserTable = () => {
     `CREATE TABLE IF NOT EXISTS
       users(
         id UUID PRIMARY KEY,
+        confirmed BOOLEAN DEFAULT false,
+        admin BOOLEAN DEFAULT false,
         email VARCHAR(128) UNIQUE NOT NULL,
         password VARCHAR(128) NOT NULL,
         created_at TIMESTAMP,

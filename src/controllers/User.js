@@ -28,7 +28,10 @@ const User = {
     try {
       const { rows } = await db.query(createQuery, values);
       const token = Helper.generateToken(rows[0].id);
-      return res.status(201).send({ token });
+      return res.status(201).send({ 
+        token,
+        isAdmin: rows[0].admin 
+      });
     } catch(error) {
       if(error.routine === '_bt_check_unique') {
         return res.status(400).send({ 'message': 'User with that email already exists.'});
@@ -50,7 +53,10 @@ const User = {
         return res.status(400).send({'message': 'The credentials provided are invalid.'});
       }
       const token = Helper.generateToken(rows[0].id);
-      return res.status(200).send({ token });
+      return res.status(200).send({ 
+        token,
+        isAdmin: rows[0].admin  
+      });
     } catch(error) {
       return res.status(400).send(error);
     }
