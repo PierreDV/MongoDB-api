@@ -23,7 +23,6 @@ const createUserTable = () => {
         created_at TIMESTAMP,
         updated_at TIMESTAMP
       )`;
-  
   pool.query(queryText)
     .then((res) => {
       console.log(res);
@@ -40,7 +39,8 @@ const createVerificationTokenTable = () => {
     `CREATE TABLE IF NOT EXISTS
       verification_tokens(
         id UUID PRIMARY KEY,
-        token VARCHAR(128) NOT NULL,
+        token VARCHAR NOT NULL,
+        user_id UUID NOT NULL,
         created_at TIMESTAMP,
         FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
       )`;

@@ -7,8 +7,7 @@ import Auth from './middleware/Auth';
 
 const app = express();
 
-const whitelist = (app.settings.env === 'development') ? 'http://localhost:3000' : process.env.FRONT_END_URL;
-app.use(cors({origin: whitelist}));
+app.use(cors({origin: process.env.FRONT_END_URL}));
 app.use(express.json());
 // Default route
 app.get('/', (req, res) => {
@@ -17,6 +16,7 @@ app.get('/', (req, res) => {
 // User routes
 app.post('/api/v1/users', User.create);
 app.post('/api/v1/users/login', User.login);
+app.post('/api/v1/users/verify', User.verify);
 // Blog post routes
 app.get('/api/v1/blog_posts', BlogPost.getAll);
 app.get('/api/v1/blog_posts/links', BlogPost.getAllLinks);

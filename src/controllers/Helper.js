@@ -1,5 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import sgMail from '@sendgrid/mail';
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+dotenv.config();
 
 const Helper = {
   hashPassword(password) {
@@ -18,6 +23,15 @@ const Helper = {
     process.env.SECRET, { expiresIn: '7d' }
     );
     return token;
+  },
+  sendVerificationEmail(email, token) {
+    const msg = {
+      to: email,
+      from: 'test@example.com',
+      subject: 'SmplBlg email verification',
+      html: `Please visit the following <a href="${process.env.HOST_URL}/api/v1/users/verify?token=${token}&email=${email}">link</a> to verify your email.`
+    };
+    sgMail.send(msg);
   }
 };
 
