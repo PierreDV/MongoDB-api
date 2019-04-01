@@ -35,6 +35,26 @@ const createUserTable = () => {
     });
 };
 
+const createVerificationTokenTable = () => {
+  const queryText =
+    `CREATE TABLE IF NOT EXISTS
+      verification_tokens(
+        id UUID PRIMARY KEY,
+        token VARCHAR(128) NOT NULL,
+        created_at TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+      )`;
+  pool.query(queryText)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+};
+
 const createBlogPostTable = () => {
   const queryText =
     `CREATE TABLE IF NOT EXISTS
@@ -71,6 +91,19 @@ const dropUserTable = () => {
     });
 };
 
+const dropVerificationTokenTable = () => {
+  const queryText = 'DROP TABLE IF EXISTS verification_tokens';
+  pool.query(queryText)
+    .then((res) => {
+      console.log(res);
+      pool.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+}
+
 const dropBlogPostTable = () => {
   const queryText = 'DROP TABLE IF EXISTS blog_posts';
   pool.query(queryText)
@@ -91,8 +124,10 @@ pool.on('remove', () => {
 
 module.exports = {
   createUserTable,
+  createVerificationTokenTable,
   createBlogPostTable,
   dropUserTable,
+  dropVerificationTokenTable,
   dropBlogPostTable
 };
 
