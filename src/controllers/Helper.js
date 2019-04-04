@@ -25,11 +25,12 @@ const Helper = {
     return token;
   },
   sendVerificationEmail(email, token) {
+    const href = `${process.env.FRONT_END_URL}/confirmation?token=${token}`
     const msg = {
       to: email,
       from: 'test@example.com',
       subject: 'SmplBlg email verification',
-      html: `Please visit the following <a href="${process.env.HOST_URL}/api/v1/users/verify?token=${token}&email=${email}">link</a> to verify your email.`
+      html: `Please visit the following <a href="${href}">link</a> to verify your email.`
     };
     sgMail.send(msg);
   }

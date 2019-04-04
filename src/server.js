@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 import '@babel/polyfill';
 import User from './controllers/User';
 import BlogPost from './controllers/BlogPost';
@@ -9,6 +10,7 @@ const app = express();
 
 app.use(cors({origin: process.env.FRONT_END_URL}));
 app.use(express.json());
+app.use(bodyParser.json());
 // Default route
 app.get('/', (req, res) => {
   return res.status(200).send({'message': 'Your enpoint is working'});
@@ -16,7 +18,7 @@ app.get('/', (req, res) => {
 // User routes
 app.post('/api/v1/users', User.create);
 app.post('/api/v1/users/login', User.login);
-app.post('/api/v1/users/verify', User.verify);
+app.post('/api/v1/verify_user', User.verify);
 // Blog post routes
 app.get('/api/v1/blog_posts', BlogPost.getAll);
 app.get('/api/v1/blog_posts/links', BlogPost.getAllLinks);
