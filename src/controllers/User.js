@@ -76,6 +76,9 @@ const User = {
       if(!rows[0]) {
         return res.status(400).send({'message': 'The credentials provided are invalid.'});
       }
+      if(!Helper.comparePassword(rows[0].password, req.body.password)) {
+        return res.status(400).send({'message': 'The password you provided does not match the account.'})
+      }
       if(!rows[0].confirmed) {
         return res.status(400).send({'message': 'You need to confirm your email'});
       }
