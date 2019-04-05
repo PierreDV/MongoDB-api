@@ -8,7 +8,7 @@ import Auth from './middleware/Auth';
 
 const app = express();
 
-app.use(cors({origin: process.env.FRONT_END_URL}));
+app.use(cors({origin: process.env.FRONT_END_HOST}));
 app.use(express.json());
 app.use(bodyParser.json());
 // Default route
