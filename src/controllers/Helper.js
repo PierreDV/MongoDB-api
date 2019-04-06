@@ -25,7 +25,7 @@ const Helper = {
     return token;
   },
   sendVerificationEmail(email, token) {
-    const href = `${process.env.FRONT_END_HOST}/confirmation?token=${token}`
+    const href = `${process.env.FRONT_END_EMAIL_URL}/confirmation?token=${token}`
     const msg = {
       to: email,
       from: 'test@example.com',
