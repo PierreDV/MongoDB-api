@@ -1,10 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 import '@babel/polyfill';
 import User from './controllers/User';
 import BlogPost from './controllers/BlogPost';
 import Auth from './middleware/Auth';
+
+dotenv.config();
 
 const app = express();
 
