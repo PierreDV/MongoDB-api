@@ -30,7 +30,7 @@ const Helper = {
       to: email,
       from: 'test@example.com',
       subject: 'SmplBlg email verification',
-      html: `Please visit the following <a href="${href}">link</a> to verify your email.`
+      html: `Please visit the following ${href}`
     };
     sgMail.send(msg);
   }
